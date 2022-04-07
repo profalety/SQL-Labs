@@ -44,5 +44,15 @@ GROUP BY rating
 HAVING avg_length >= 120;
 
 /* 8. Rank films by length (filter out the rows that have nulls or 0s in length column). In your output, only select the columns title, length, and the rank. */
-SELECT * FROM film;
+SELECT title, length
+FROM film
+WHERE length NOT LIKE '0' OR length = null 
+ORDER BY length DESC
+;
+
+
+RANK() OVER (
+	PARTITION BY <expr1>[{,<expr2>...}]
+	ORDER BY <expr1> [ASC|DESC], [{,<expr2>...}]
+)
 
