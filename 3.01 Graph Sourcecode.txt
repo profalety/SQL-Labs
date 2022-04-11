@@ -1,0 +1,175 @@
+
+//// Source Code for dbdiagram.io
+//// -- LEVEL 1
+//// -- Tables and References
+
+
+// Creating tables
+Table payment {
+  payment_id mediumint [pk, increment] // auto-increment
+  rental_id mediumint [unique]
+  amount float
+  payment_date timestamp
+  last_update timestamp
+}
+
+//composite foreign key
+Ref: payment.(rental_id) > rental.(rental_id)
+
+Table rental {
+  rental_id mediumint [pk, increment] // auto-increment
+  inventory_id mediumint
+  customer_id mediumint
+  rental_date timestamp
+  return_date timestamp
+  last_update timestamp
+}
+
+//composite foreign key
+Ref: rental.(inventory_id) > inventory.(inventory_id)
+Ref: rental.(customer_id) > customer.(customer_id)
+
+
+Table inventory {
+  inventory_id mediumint [pk, increment] // auto-increment
+  film_id mediumint
+  store_id mediumint
+  last_update timestamp
+}
+
+//composite foreign key
+Ref: inventory.(film_id) > film.(film_id)
+Ref: inventory.(store_id) > store.(store_id)
+
+Table customer {
+  customer_id mediumint [pk, increment] // auto-increment
+  address_id mediumint 
+  first_name varchar
+  last_name varchar
+  email varchar
+  active boolean
+  create_date timestamp
+  last_update timestamp
+}
+
+//composite foreign key
+Ref: customer.(address_id) > address.(address_id)
+
+
+Table city {
+  city_id mediumint [pk, increment] // auto-increment
+  country_id mediumint
+  city varchar
+  last_update timestamp
+}
+
+//composite foreign key
+Ref: city.(country_id) > country.(country_id)
+
+
+Table country {
+  country_id mediumint [pk, increment] // auto-increment
+  country varchar
+  last_update timestamp
+}
+
+Table staff {
+  staff_id mediumint [pk, increment] // auto-increment
+  address_id mediumint 
+  store_id mediumint
+  first_name varchar
+  last_name varchar
+  username varchar
+  password varchar
+  email varchar
+  picture blob
+  active boolean
+  last_update timestamp
+}
+
+//composite foreign key
+Ref: staff.(address_id) > address.(address_id)
+Ref: staff.(store_id) > store.(store_id)
+
+
+Table language {
+  language_id mediumint [pk, increment] // auto-increment
+  name varchar
+  last_update timestamp
+}
+
+
+Table language_film {
+  language_id mediumint
+  film_id mediumint
+  last_update timestamp
+}
+
+//composite foreign key
+Ref: language_film.(language_id) > language.(language_id)
+Ref: language_film.(film_id) > film.(film_id)
+
+Table film {
+  film_id mediumint pk
+  category_id mediumint 
+  original_language_id mediumint
+  title varchar(255)
+  description blob
+  release_year varchar(4)
+  length mediumint
+  replacement_cost mediumint
+  rating varchar(10)
+  special_features varchar(100)
+  last_update timestamp
+}
+
+//composite foreign key
+Ref: film.(category_id) > category.(category_id)
+Ref: film.(original_language_id) > language.(language_id)
+
+
+Table actor {
+  actor_id mediumint [pk, increment]
+  first_name varchar(45)
+  last_name varchar(45)
+  last_update timestamp
+}
+
+Table film_actor {
+  actor_id mediumint
+  film_id mediumint
+  last_update timestamp
+}
+Ref: film_actor.(actor_id) > actor.(actor_id)
+Ref: film_actor.(film_id) > film.(film_id)
+
+
+Table address {
+  address_id int [pk, increment]
+  city_id int
+  address varchar(50)
+  address2 varchar(50)
+  district varchar(20)
+  postal_code varchar(10)
+  phone varchar(20)
+  last_update timestamp
+}
+Ref: address.(city_id) > city.(city_id)
+
+Table store {
+  store_id int [pk, increment]
+  manager_staff_id int
+  address_id int
+  last_update timestamp
+}
+
+Ref: store.(manager_staff_id) > staff.(staff_id)
+Ref: store.(address_id) > address.(address_id)
+
+
+Table category {
+  category_id int [pk, increment]
+  category_name varchar(20)
+  last_update timestamp
+}
+

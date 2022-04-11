@@ -115,9 +115,11 @@ LEFT JOIN inventory i USING(inventory_id)
 ORDER BY r1.customer_id, i -- i.film_id 
 
 ;
-SELECT customer_id, film_id, COUNT(*) over (partition by customer_id) as rented
+SELECT r1.customer_id, i1.film_id, COUNT(*) over (partition by customer_id) as rented
 FROM rental r1
-LEFT JOIN inventory i1 USING(inventory_id)
+JOIN rental r2 ON r1.customer_id <> r2.customer_id
+JOIN inventory i1 ON r1.customer_id = i1.customer_id
+JOIN inventory i2 ON r2.customer_id = i2.customer_id 
 GROUP BY i1.film_id
 -- HAVING COUNT(*) >=3
 ORDER BY r1.customer_id -- i.film_id 
