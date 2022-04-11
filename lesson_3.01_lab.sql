@@ -32,7 +32,7 @@ VALUES (CURRENT_TIMESTAMP(), 1, 130, 1, CURRENT_TIMESTAMP());
 /* Activity 2*/
 /* 1. Use dbdiagram.io or draw.io to propose a new structure for the Sakila database.*/
 /* 2. Define primary keys and foreign keys for the new database. */
--- 3.01 Graph PDF @ https://github.com/profalety/SQL-Labs/blob/main/3.01%20Graph.pdf
--- 3.01 Graph Source Code for dbdiagram.io @ https://github.com/profalety/SQL-Labs/blob/main/3.01%20Graph%20Sourcecode.txt
+-- 3.01 Graph PDF @ https://github.com/profalety/SQL-Labs/blob/main/lesson_3.01_lab_graph.pdf
+-- 3.01 Graph Source Code for dbdiagram.io @ https://github.com/profalety/SQL-Labs/blob/main/lesson_3.01_lab_graph_sourcecode.txt
 
 
